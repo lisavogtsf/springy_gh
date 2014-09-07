@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SpringyLV</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<!-- my stylesheet -->
+	<link rel ="stylesheet" href="public/custom_style.css">
+	<!--from Springy.js -->
+				<script src="springy.js"></script>
+				<script src="springyui.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-1"></div><!-- removed left column -->
+			<div class="col-md-10" id="springy-col"><!--big central column-->
+				<h2>Visualize GitHub Repositories with <a id="reload">Springy.js</a></h2>
+				<ul class="list-inline">
+					<li>eBook Dashboard</li>
+					<li><a href="todo.html">Do all the things!</a></li>
+					<li><a href="beginner-resources.html">Beginner Resources</a></li>
+<!-- 					<li>[Visit Repository]</li>
+					<li>[Visit Webpage]</li> -->
+				</ul>
+				<div id="nodeInfo"><h4>No node selected</h4></div>
+				<script>
+					var graphJSON = {
+						"nodes": [
+							"README.md",
+							"config",
+							"migrations",
+							"models",
+							"public",
+							"test",
+							"views",
+							"app.js"
+						],
+						"edges": [
+							["README.md", "config", {color: 'purple'}],
+							["config", "README.md", {color: 'thistle'}],
+							["config", "migrations"],
+							["README.md", "models", {color: 'mediumslateblue'}],
+							["models", "README.md"],
+							["app.js", "README.md"],
+							["config", "app.js", {color: 'teal'}],
+							["public", "app.js"],
+							["test", "app.js"],
+							["views", "app.js"]
+						]
+					};
+					$(function(){
+						var graph = new Springy.Graph();
+						graph.loadJSON(graphJSON);
+
+						var springy = jQuery('#springydemo').springy({
+							graph: graph,
+							nodeSelected: function(node){
+								// Here is where you can say what should happen when a node
+								// is selected
+								var nodeLabel = (node.data.label);
+      							console.log('Node selected: ' + nodeLabel);
+      							$('#nodeInfo').empty();
+      							$('#nodeInfo').append("<h4>Currently selected node: " + nodeLabel + "</h4>");
+							}
+						});
+					});
+					$('#reload').click(function() {
+						location.reload(true);
+					});
+
+				</script>
+
+				<canvas id="springydemo" width="700" height="500" align="center">Springy filenames</canvas>
+
+			</div><!-- closes center column -->
+			<div class="col-lg-1" id="rightColumn"></div><!-- closes right column -->
+		</div> <!-- closes row -->
+	</div><!-- closes container -->
+</body>
+</html>
+
