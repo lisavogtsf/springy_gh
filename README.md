@@ -3,7 +3,7 @@ springy_gh
 
 Uses force-directed graphs to visualize GitHub repositories in motion
 
-[Springy.js visualization of my GitHub repos](http://lisavogtsf.github.io/long_weekend_lab/)
+[Springy.js visualization of my GitHub repos](http://lisavogtsf.github.io/springy_gh/)
 
 ## Concept
 
